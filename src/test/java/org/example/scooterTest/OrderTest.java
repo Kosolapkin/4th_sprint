@@ -47,7 +47,11 @@ public class OrderTest {
         // Создать веб-драйвер для Firefox
         driver = new FirefoxDriver();
         // Открыть страницу заказа Яндекс Самокат
-        driver.get("https://qa-scooter.praktikum-services.ru/order");
+        driver.get("https://qa-scooter.praktikum-services.ru");
+        // Создать объект класса с домашней страницей
+        HomePageScooter objHomePage = new HomePageScooter(driver);
+        // Нажать на кнопку Заказать на чердаке
+        objHomePage.clickHeaderOrderButton();
         // Создать объект класса со страницей заказа
         OrderPageScooter objOrderPage = new OrderPageScooter(driver);
         // Принять куки

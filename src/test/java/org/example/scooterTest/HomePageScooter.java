@@ -122,13 +122,4 @@ public class HomePageScooter {
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", bigButton);
         driver.findElement(pageOrderButton).click();
     }
-
-
-
-    /*
-    private int number;
-    private By question = By.xpath(".//div[@class='accordion__item']");
-    public void clickQuestion(int number) {
-        driver.findElement(question[number]).click();
-    }*/
 }
