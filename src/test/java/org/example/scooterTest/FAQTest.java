@@ -2,6 +2,8 @@ package org.example.scooterTest;
 
 import org.junit.After;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -10,9 +12,29 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.example.scooterTest.Resources.*;
 
+@RunWith(Parameterized.class)
 public class FAQTest {
 
     private WebDriver driver;
+    private final String answerText;
+
+    public FAQTest(String answerText) {
+        this.answerText = answerText;
+    }
+
+    @Parameterized.Parameters
+    public static Object[][] getAnswerText() {
+        return new Object[][] {
+                {answer1Text},
+                {answer2Text},
+                {answer3Text},
+                {answer4Text},
+                {answer5Text},
+                {answer6Text},
+                {answer7Text},
+                {answer8Text},
+        };
+    }
 
     @Test
     public void FAQCorrectAnswerText() {
@@ -28,7 +50,7 @@ public class FAQTest {
 
         // Проверка соответствия текста ответа с ожидаемым
         objHomePage.clickQuestion1();
-        objHomePage.isCorrectText(objHomePage.getAnswer1(), answer1Text);
+        objHomePage.isCorrectText(objHomePage.getAnswer1(), answerText);
 
         objHomePage.clickQuestion2();
         objHomePage.isCorrectText(objHomePage.getAnswer2(), answer2Text);
