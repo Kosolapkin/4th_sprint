@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import static org.example.scooterTest.HomePageScooter.*;
 import static org.example.scooterTest.Resources.*;
 
 @RunWith(Parameterized.class)
@@ -17,22 +18,26 @@ public class FAQTest {
 
     private WebDriver driver;
     private final String answerText;
+    private final By answerXpath;
+    private final By questionXpath;
 
-    public FAQTest(String answerText) {
+    public FAQTest(String answerText, By answerXpath, By questionXpath) {
         this.answerText = answerText;
+        this.answerXpath = answerXpath;
+        this.questionXpath = questionXpath;
     }
 
     @Parameterized.Parameters
     public static Object[][] getAnswerText() {
         return new Object[][] {
-                {answer1Text},
-                {answer2Text},
-                {answer3Text},
-                {answer4Text},
-                {answer5Text},
-                {answer6Text},
-                {answer7Text},
-                {answer8Text},
+                {answer1Text, answerXpath1, questionXpath1},
+                {answer2Text, answerXpath2, questionXpath2},
+                {answer3Text, answerXpath3, questionXpath3},
+                {answer4Text, answerXpath4, questionXpath4},
+                {answer5Text, answerXpath5, questionXpath5},
+                {answer6Text, answerXpath6, questionXpath6},
+                {answer7Text, answerXpath7, questionXpath7},
+                {answer8Text, answerXpath8, questionXpath8},
         };
     }
 
@@ -47,32 +52,9 @@ public class FAQTest {
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", tableFAQ);
         // Создать объект класса с домашней страницей
         HomePageScooter objHomePage = new HomePageScooter(driver);
-
         // Проверка соответствия текста ответа с ожидаемым
-        objHomePage.clickQuestion1();
-        objHomePage.isCorrectText(objHomePage.getAnswer1(), answerText);
-
-        objHomePage.clickQuestion2();
-        objHomePage.isCorrectText(objHomePage.getAnswer2(), answer2Text);
-
-        objHomePage.clickQuestion3();
-        objHomePage.isCorrectText(objHomePage.getAnswer3(), answer3Text);
-
-        objHomePage.clickQuestion4();
-        objHomePage.isCorrectText(objHomePage.getAnswer4(), answer4Text);
-
-        objHomePage.clickQuestion5();
-        objHomePage.isCorrectText(objHomePage.getAnswer5(), answer5Text);
-
-        objHomePage.clickQuestion6();
-        objHomePage.isCorrectText(objHomePage.getAnswer6(), answer6Text);
-
-        objHomePage.clickQuestion7();
-        objHomePage.isCorrectText(objHomePage.getAnswer7(), answer7Text);
-
-        objHomePage.clickQuestion8();
-        objHomePage.isCorrectText(objHomePage.getAnswer8(), answer8Text);
-
+        objHomePage.clickQuestion(questionXpath);
+        objHomePage.isCorrectText(objHomePage.getAnswer(answerXpath), answerText);
     }
 
     @After
